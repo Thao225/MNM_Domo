@@ -15,7 +15,7 @@ mongoose.connect("mongodb://hostname/todo-app", { useNewUrlParser: true, useUnif
 
 
 
-  const Task = require('./yourTaskModel'); // Import model
+  const Task = require('./yourTask'); // Import model
 
 // Tạo một task mới
 const newTask = new Task({
