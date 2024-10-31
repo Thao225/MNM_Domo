@@ -23,7 +23,7 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-  const Task = require('./yourTask'); // Import model
+  const Task = require('./yourTaskModel'); // Import model
 
 // Tạo một task mới
 const newTask = new Task({
