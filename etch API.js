@@ -1,5 +1,5 @@
 
-fetch('http://127.0.0.1:5500/index.html')
+fetch('https://thao225.github.io/MNM_Domo/')
   .then(response => response.json())
   .then(data => {
     // Hiển thị danh sách bài viết lên giao diện
@@ -16,7 +16,7 @@ fetch('http://127.0.0.1:5500/index.html')
 
 const newPost = { title: 'Bài viết mới', content: 'Nội dung bài viết' };
 
-fetch('http://127.0.0.1:5500/index.html', {
+fetch('https://thao225.github.io/MNM_Domo/', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
