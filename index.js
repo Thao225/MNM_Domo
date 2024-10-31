@@ -1,55 +1,57 @@
-import express from 'express';
+const express = require('express');
+
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
 const app = express();
-const port = 3000;
+const url = "mongodb://MNM/todo-app" ;
+MongoClient.connect(url, function(err, client) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
 
-// Giả sử dữ liệu tasks được lưu trữ trong một mảng
-let tasks = [];
+  const db = client.db(dbName);
 
-// Route để lấy danh sách tất cả các tasks
-app.get('/tasks', (req, res) => {
-  res.json(tasks);
+  client.close();
 });
 
-// Route để tạo một task mới
-app.post('/tasks', (req, res) => {
-  const newTask = req.body;
-  tasks.push(newTask);
-  res.json(newTask);
+  const taskSchema = new mongoose.Schema({
+    title: String,
+    description: String, completed: Boolean
+  });
+  const Task = mongoose.model('Task', taskSchema);
+  module.exports = Task;
+
+
+
+  const Task = require('./yourTask'); // Import model
+
+// Tạo một task mới
+const newTask = new Task({
+  title: 'Learn Mongoose',
+  description: 'Learn how to use Mongoose ODM',
+  completed: false
 });
 
-// Route để lấy thông tin một task cụ thể
-app.get('/tasks/:id', (req, res) => {
-  const id = req.params.id;
-  const task = tasks.find(task => task.id === id);
-  if (task) {
-    res.json(task);
-  } else {
-    res.status(404).json({ message: 'Task not found'   
- });
-  }
-});
+newTask.save()
+  .then(task => console.log(task))
+  .catch(err => console.error(err));
 
-// Route để cập nhật thông tin một task
-app.put('/tasks/:id', (req, res) => {
-  const id = req.params.id;
-  const updatedTask = req.body;
-  const index = tasks.findIndex(task => task.id === id);
-  if (index !== -1) {
-    tasks[index] = { ...tasks[index], ...updatedTask };
-    res.json(tasks[index]);
-  } else {
-    res.status(404).json({ message: 'Task not found'   
- });
-  }
-});
+// Lấy tất cả các tasks
+Task.find()
+  .then(tasks => console.log(tasks))
+  .catch(err => console.error(err));
 
-// Route để xóa một task
-app.delete('/tasks/:id', (req, res) => {
-  const id = req.params.id;
-  tasks = tasks.filter(task => task.id !== id);
-  res.json({ message: 'Task deleted' });
-});
+// Tìm một task theo ID
+Task.findById('your_task_id')
+  .then(task => console.log(task))
+  .catch(err => console.error(err));
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// Cập nhật một task
+Task.findByIdAndUpdate('your_task_id', { completed: true })
+  .then(task => console.log(task))
+  .catch(err => console.error(err));
+
+// Xóa một task
+Task.findByIdAndDelete('your_task_id')
+  .then(() => console.log('Task deleted'))
+  .catch(err => console.error(err));
