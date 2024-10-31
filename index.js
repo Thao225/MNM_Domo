@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const app = express();
-const url = "mongodb://MNM/todo-app" ;
+const url = "mongodb://MNM/local" ;
 MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
   console.log("Connected successfully to server");
