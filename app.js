@@ -26,28 +26,6 @@ addButton.addEventListener('click',  
             });
         li.appendChild(completeButton);
     }
+
     
 });
-import React, { useState, useEffect } from 'react';
-
-function App() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    fetch('/tasks')
-      .then(res => res.json())
-      .then(data => setTasks(data));
-  }, []);
-
-  return (
-    <div>
-      <h1>Danh sách việc làm</h1>
-      <ul>
-        {tasks.map(task => (
-          <li key={task._id}>{task.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-export default App;
