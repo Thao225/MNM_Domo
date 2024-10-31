@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = 'mongodb+srv://buithienhuongthao2005:T6ypmrH9niWs9BH4@ClusterMNM.mongodb.net/todo-app>?retryWrites=true&w=majority';
+const uri = 'mongodb://MNM/todo-app';
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
